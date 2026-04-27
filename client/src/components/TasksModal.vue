@@ -255,7 +255,7 @@ export default {
 }
 
 .modal-container {
-  background: white;
+  background: var(--bg-surface);
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   width: 90%;
@@ -280,14 +280,14 @@ export default {
 .modal-title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #0f172a;
+  color: var(--text-primary);
   margin: 0;
 }
 
 .close-button {
   background: none;
   border: none;
-  color: #64748b;
+  color: var(--text-muted);
   cursor: pointer;
   padding: 0.5rem;
   display: flex;
@@ -299,7 +299,7 @@ export default {
 
 .close-button:hover {
   background: #f1f5f9;
-  color: #0f172a;
+  color: var(--text-primary);
 }
 
 .modal-body {
@@ -333,7 +333,7 @@ export default {
 
 /* Task Form */
 .task-form {
-  background: #f8fafc;
+  background: var(--bg-subtle);
   border-radius: 12px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
@@ -389,7 +389,7 @@ label {
 
 .task-select {
   cursor: pointer;
-  background: white;
+  background: var(--bg-surface);
 }
 
 .task-add-btn {
@@ -423,7 +423,7 @@ label {
 .no-tasks {
   text-align: center;
   padding: 3rem;
-  color: #64748b;
+  color: var(--text-muted);
   font-size: 1.1rem;
   font-style: italic;
 }
@@ -435,7 +435,7 @@ label {
 }
 
 .task-item {
-  background: white;
+  background: var(--bg-surface);
   border: 2px solid #e2e8f0;
   border-radius: 10px;
   padding: 1rem 1.25rem;
@@ -443,7 +443,7 @@ label {
 }
 
 .task-item:hover {
-  border-color: #cbd5e1;
+  border-color: var(--border-strong);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -490,7 +490,7 @@ label {
   flex: 1;
   cursor: pointer;
   user-select: none;
-  color: #0f172a;
+  color: var(--text-primary);
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.4;
@@ -559,7 +559,7 @@ label {
   align-items: center;
   gap: 0.5rem;
   font-size: 0.813rem;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .task-due-date svg {
