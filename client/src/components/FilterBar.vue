@@ -35,11 +35,11 @@
           <label>{{ t('filters.category') }}</label>
           <select v-model="selectedCategory" class="filter-select">
             <option value="all">{{ t('filters.all') }}</option>
-            <option value="circuit boards">{{ t('categories.circuitBoards') }}</option>
-            <option value="sensors">{{ t('categories.sensors') }}</option>
-            <option value="actuators">{{ t('categories.actuators') }}</option>
-            <option value="controllers">{{ t('categories.controllers') }}</option>
-            <option value="power supplies">{{ t('categories.powerSupplies') }}</option>
+            <option value="Circuit Boards">{{ t('categories.circuitBoards') }}</option>
+            <option value="Sensors">{{ t('categories.sensors') }}</option>
+            <option value="Actuators">{{ t('categories.actuators') }}</option>
+            <option value="Controllers">{{ t('categories.controllers') }}</option>
+            <option value="Power Supplies">{{ t('categories.powerSupplies') }}</option>
           </select>
         </div>
 
@@ -47,10 +47,10 @@
           <label>{{ t('filters.orderStatus') }}</label>
           <select v-model="selectedStatus" class="filter-select">
             <option value="all">{{ t('filters.all') }}</option>
-            <option value="delivered">{{ t('status.delivered') }}</option>
-            <option value="shipped">{{ t('status.shipped') }}</option>
-            <option value="processing">{{ t('status.processing') }}</option>
-            <option value="backordered">{{ t('status.backordered') }}</option>
+            <option value="Delivered">{{ t('status.delivered') }}</option>
+            <option value="Shipped">{{ t('status.shipped') }}</option>
+            <option value="Processing">{{ t('status.processing') }}</option>
+            <option value="Backordered">{{ t('status.backordered') }}</option>
           </select>
         </div>
       </div>

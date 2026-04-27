@@ -227,15 +227,91 @@ def get_recent_transactions():
     """Get recent transactions"""
     return recent_transactions
 
-@app.get("/api/reports/quarterly")
-def get_quarterly_reports():
-    """Get quarterly performance reports"""
-    # Calculate quarterly statistics from orders
-    quarters = {}
+@app.get("/api/restocking/recommendations")
+def get_restocking_recommendations(
+    budget: float = 10000,
+    warehouse: Optional[str] = None,
+    category: Optional[str] = None
+):
+    """Recommend purchase orders given stock levels, demand forecast, and budget ceiling"""
+    filtered_inventory = apply_filters(inventory_items, warehouse=warehouse, category=category)
 
-    for order in orders:
+    demand_lookup = {f['item_sku']: f for f in demand_forecasts}
+    backlog_lookup = {b['item_sku']: b for b in backlog_items}
+
+    recommendations = []
+    for item in filtered_inventory:
+        sku = item['sku']
+        current_qty = item.get('quantity_on_hand', 0)
+        reorder_point = item.get('reorder_point', 0)
+        unit_cost = item.get('unit_cost', 0)
+
+        demand_data = demand_lookup.get(sku)
+        target_qty = demand_data['forecasted_demand'] if demand_data else reorder_point * 1.5
+
+        shortfall = max(0, target_qty - current_qty)
+        if shortfall <= 0:
+            continue
+
+        safety_stock = reorder_point * 0.15
+        recommended_qty = max(1, round(shortfall + safety_stock))
+        estimated_cost = round(recommended_qty * unit_cost, 2)
+
+        backlog = backlog_lookup.get(sku)
+        recommendations.append({
+            'sku': sku,
+            'name': item['name'],
+            'category': item['category'],
+            'warehouse': item['warehouse'],
+            'current_qty': current_qty,
+            'reorder_point': reorder_point,
+            'recommended_qty': recommended_qty,
+            'unit_cost': unit_cost,
+            'estimated_cost': estimated_cost,
+            'in_backlog': backlog is not None,
+            'backlog_priority': backlog.get('priority') if backlog else None,
+            'has_forecast': demand_data is not None,
+            'trend': demand_data.get('trend', 'stable') if demand_data else 'stable'
+        })
+
+    priority_order = {'high': 0, 'medium': 1, 'low': 2}
+    recommendations.sort(key=lambda x: (
+        0 if x['in_backlog'] else 1,
+        priority_order.get(x['backlog_priority'], 3),
+        -(x['recommended_qty'] / max(x['estimated_cost'], 1))
+    ))
+
+    total_cost = 0
+    result = []
+    for rec in recommendations:
+        within = total_cost + rec['estimated_cost'] <= budget
+        if within:
+            total_cost += rec['estimated_cost']
+        result.append({**rec, 'within_budget': within})
+
+    return {
+        'recommendations': result,
+        'total_within_budget': round(total_cost, 2),
+        'budget_ceiling': budget,
+        'budget_remaining': round(budget - total_cost, 2),
+        'items_within_budget': sum(1 for r in result if r['within_budget']),
+        'items_over_budget': sum(1 for r in result if not r['within_budget'])
+    }
+
+@app.get("/api/reports/quarterly")
+def get_quarterly_reports(
+    warehouse: Optional[str] = None,
+    category: Optional[str] = None,
+    status: Optional[str] = None,
+    month: Optional[str] = None
+):
+    """Get quarterly performance reports with optional filtering"""
+    filtered = apply_filters(orders, warehouse=warehouse, category=category, status=status)
+    filtered = filter_by_month(filtered, month)
+
+    quarters = {}
+    for order in filtered:
         order_date = order.get('order_date', '')
-        # Determine quarter
         if '2025-01' in order_date or '2025-02' in order_date or '2025-03' in order_date:
             quarter = 'Q1-2025'
         elif '2025-04' in order_date or '2025-05' in order_date or '2025-06' in order_date:
@@ -248,20 +324,13 @@ def get_quarterly_reports():
             continue
 
         if quarter not in quarters:
-            quarters[quarter] = {
-                'quarter': quarter,
-                'total_orders': 0,
-                'total_revenue': 0,
-                'delivered_orders': 0,
-                'avg_order_value': 0
-            }
+            quarters[quarter] = {'quarter': quarter, 'total_orders': 0, 'total_revenue': 0, 'delivered_orders': 0, 'avg_order_value': 0}
 
         quarters[quarter]['total_orders'] += 1
         quarters[quarter]['total_revenue'] += order.get('total_value', 0)
         if order.get('status') == 'Delivered':
             quarters[quarter]['delivered_orders'] += 1
 
-    # Calculate averages and fulfillment rate
     result = []
     for q, data in quarters.items():
         if data['total_orders'] > 0:
@@ -269,37 +338,33 @@ def get_quarterly_reports():
             data['fulfillment_rate'] = round((data['delivered_orders'] / data['total_orders']) * 100, 1)
         result.append(data)
 
-    # Sort by quarter
     result.sort(key=lambda x: x['quarter'])
     return result
 
 @app.get("/api/reports/monthly-trends")
-def get_monthly_trends():
-    """Get month-over-month trends"""
-    months = {}
+def get_monthly_trends(
+    warehouse: Optional[str] = None,
+    category: Optional[str] = None,
+    status: Optional[str] = None,
+    month: Optional[str] = None
+):
+    """Get month-over-month trends with optional filtering"""
+    filtered = apply_filters(orders, warehouse=warehouse, category=category, status=status)
+    filtered = filter_by_month(filtered, month)
 
-    for order in orders:
+    months = {}
+    for order in filtered:
         order_date = order.get('order_date', '')
         if not order_date:
             continue
-
-        # Extract month (format: YYYY-MM-DD)
-        month = order_date[:7]  # Gets YYYY-MM
-
-        if month not in months:
-            months[month] = {
-                'month': month,
-                'order_count': 0,
-                'revenue': 0,
-                'delivered_count': 0
-            }
-
-        months[month]['order_count'] += 1
-        months[month]['revenue'] += order.get('total_value', 0)
+        month_key = order_date[:7]
+        if month_key not in months:
+            months[month_key] = {'month': month_key, 'order_count': 0, 'revenue': 0, 'delivered_count': 0}
+        months[month_key]['order_count'] += 1
+        months[month_key]['revenue'] += order.get('total_value', 0)
         if order.get('status') == 'Delivered':
-            months[month]['delivered_count'] += 1
+            months[month_key]['delivered_count'] += 1
 
-    # Convert to list and sort
     result = list(months.values())
     result.sort(key=lambda x: x['month'])
     return result
