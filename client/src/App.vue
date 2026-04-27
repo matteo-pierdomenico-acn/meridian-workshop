@@ -317,6 +317,17 @@ body {
   border-color: var(--border-strong);
 }
 
+/* ── Responsive nav ── */
+@media (max-width: 1400px) {
+  .subtitle { display: none; }
+  .nav-tabs a { padding: 0.625rem 0.875rem; }
+}
+
+@media (max-width: 1200px) {
+  .nav-tabs a { padding: 0.5rem 0.625rem; font-size: 0.875rem; }
+  .nav-container { padding: 0 1rem; }
+}
+
 .main-content {
   flex: 1;
   max-width: 1600px;
