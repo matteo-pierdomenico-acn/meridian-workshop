@@ -326,7 +326,7 @@ body {
 }
 
 .page-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .page-header h2 {
@@ -339,7 +339,7 @@ body {
 
 .page-header p {
   color: var(--text-muted);
-  font-size: 0.938rem;
+  font-size: 0.813rem;
 }
 
 .stats-grid {
@@ -352,15 +352,21 @@ body {
 .stat-card {
   background: var(--bg-surface);
   padding: 1.25rem;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px solid var(--border);
-  transition: all 0.2s ease;
+  border-left: 4px solid var(--border);
+  transition: border-color 0.2s ease;
 }
 
 .stat-card:hover {
   border-color: var(--border-strong);
-  box-shadow: var(--shadow-card);
+  border-left-color: var(--border-strong);
 }
+
+.stat-card.success { border-left-color: #059669; }
+.stat-card.warning { border-left-color: #ea580c; }
+.stat-card.danger  { border-left-color: #dc2626; }
+.stat-card.info    { border-left-color: var(--accent); }
 
 .stat-label {
   color: var(--text-muted);
@@ -372,7 +378,7 @@ body {
 }
 
 .stat-value {
-  font-size: 2.25rem;
+  font-size: 1.875rem;
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.025em;
@@ -385,7 +391,7 @@ body {
 
 .card {
   background: var(--bg-surface);
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 1.25rem;
   border: 1px solid var(--border);
   margin-bottom: 1.25rem;
@@ -443,14 +449,22 @@ tbody tr {
   transition: background-color 0.15s ease;
 }
 
+tbody tr:nth-child(even) {
+  background: var(--bg-subtle);
+}
+
 tbody tr:hover {
   background: var(--bg-surface-2);
 }
 
+.col-num {
+  text-align: right;
+}
+
 .badge {
   display: inline-block;
-  padding: 0.313rem 0.75rem;
-  border-radius: 6px;
+  padding: 0.2rem 0.625rem;
+  border-radius: 9999px;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;

@@ -4,7 +4,7 @@
       <div class="filters-grid">
         <div class="filter-group">
           <label>{{ t('filters.timePeriod') }}</label>
-          <select v-model="selectedPeriod" class="filter-select">
+          <select v-model="selectedPeriod" class="filter-select" :class="{ active: selectedPeriod !== 'all' }">
             <option value="all">{{ t('filters.allMonths') }}</option>
             <option value="2025-01">{{ t('months.january') }}</option>
             <option value="2025-02">{{ t('months.february') }}</option>
@@ -23,7 +23,7 @@
 
         <div class="filter-group">
           <label>{{ t('filters.location') }}</label>
-          <select v-model="selectedLocation" class="filter-select">
+          <select v-model="selectedLocation" class="filter-select" :class="{ active: selectedLocation !== 'all' }">
             <option value="all">{{ t('filters.all') }}</option>
             <option value="San Francisco">{{ t('warehouses.sanFrancisco') }}</option>
             <option value="London">{{ t('warehouses.london') }}</option>
@@ -33,7 +33,7 @@
 
         <div class="filter-group">
           <label>{{ t('filters.category') }}</label>
-          <select v-model="selectedCategory" class="filter-select">
+          <select v-model="selectedCategory" class="filter-select" :class="{ active: selectedCategory !== 'all' }">
             <option value="all">{{ t('filters.all') }}</option>
             <option value="Circuit Boards">{{ t('categories.circuitBoards') }}</option>
             <option value="Sensors">{{ t('categories.sensors') }}</option>
@@ -45,7 +45,7 @@
 
         <div class="filter-group">
           <label>{{ t('filters.orderStatus') }}</label>
-          <select v-model="selectedStatus" class="filter-select">
+          <select v-model="selectedStatus" class="filter-select" :class="{ active: selectedStatus !== 'all' }">
             <option value="all">{{ t('filters.all') }}</option>
             <option value="Delivered">{{ t('status.delivered') }}</option>
             <option value="Shipped">{{ t('status.shipped') }}</option>
@@ -102,8 +102,8 @@ export default {
 
 <style scoped>
 .filters-bar {
-  background: #f8fafc;
-  border-bottom: 1px solid #e2e8f0;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
   padding: 0.75rem 0;
   position: sticky;
   top: 70px;
@@ -135,31 +135,37 @@ export default {
 .filter-group label {
   font-size: 0.75rem;
   font-weight: 600;
-  color: #64748b;
+  color: var(--text-muted);
   white-space: nowrap;
 }
 
 .filter-select {
   padding: 0.4rem 0.75rem;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border-strong);
   border-radius: 6px;
   font-size: 0.813rem;
-  color: #0f172a;
-  background: white;
+  color: var(--text-primary);
+  background: var(--bg-surface);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: border-color 0.2s;
   font-weight: 500;
   min-width: 140px;
 }
 
 .filter-select:hover {
-  border-color: #94a3b8;
+  border-color: var(--text-faint);
 }
 
 .filter-select:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.filter-select.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
 }
 
 .reset-filters-btn {
@@ -167,19 +173,24 @@ export default {
   align-items: center;
   justify-content: center;
   padding: 0.4rem;
-  background: white;
-  border: 1px solid #e2e8f0;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
   border-radius: 6px;
-  color: #64748b;
+  color: var(--text-muted);
   cursor: pointer;
   transition: all 0.2s;
   flex-shrink: 0;
+  margin-left: 0.5rem;
+  padding-left: 1rem;
+  border-left: 1px solid var(--border);
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  border-radius: 0;
 }
 
 .reset-filters-btn:hover:not(:disabled) {
-  background: #f8fafc;
-  border-color: #cbd5e1;
-  color: #0f172a;
+  color: var(--text-primary);
 }
 
 .reset-filters-btn:disabled {
