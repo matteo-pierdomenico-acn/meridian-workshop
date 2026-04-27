@@ -197,7 +197,8 @@ export default {
     category: 'カテゴリ',
     orderStatus: '注文ステータス',
     all: 'すべて',
-    allMonths: 'すべての月'
+    allMonths: 'すべての月',
+    resetFilters: 'すべてリセット'
   },
 
   // Statuses
@@ -358,7 +359,16 @@ export default {
     priority: '優先度',
     dueDate: '期限',
     addTask: 'タスクを追加',
-    noTasks: 'タスクがありません。上記からタスクを追加してください！'
+    noTasks: 'タスクがありません。上記からタスクを追加してください！',
+    today: '今日',
+    tomorrow: '明日',
+    yesterday: '昨日',
+    daysAgo: '{n}日前',
+    inDays: '{n}日後',
+    completed: '完了',
+    overdue: '期限超過',
+    dueSoon: 'もうすぐ期限',
+    upcoming: '予定'
   },
 
   // Language

@@ -197,7 +197,8 @@ export default {
     category: 'Category',
     orderStatus: 'Order Status',
     all: 'All',
-    allMonths: 'All Months'
+    allMonths: 'All Months',
+    resetFilters: 'Reset all filters'
   },
 
   // Statuses
@@ -358,7 +359,16 @@ export default {
     priority: 'Priority',
     dueDate: 'Due Date',
     addTask: 'Add Task',
-    noTasks: 'No tasks yet. Add your first task above!'
+    noTasks: 'No tasks yet. Add your first task above!',
+    today: 'today',
+    tomorrow: 'tomorrow',
+    yesterday: 'yesterday',
+    daysAgo: '{n} days ago',
+    inDays: 'in {n} days',
+    completed: 'Completed',
+    overdue: 'Overdue',
+    dueSoon: 'Due Soon',
+    upcoming: 'Upcoming'
   },
 
   // Language

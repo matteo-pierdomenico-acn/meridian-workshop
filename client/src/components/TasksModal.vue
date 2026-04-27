@@ -177,15 +177,13 @@ export default {
       const diffTime = dueDate - today
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
 
-      const isJapanese = currentLocale.value === 'ja'
+      if (diffDays === 0) return t('tasks.today')
+      if (diffDays === 1) return t('tasks.tomorrow')
+      if (diffDays === -1) return t('tasks.yesterday')
+      if (diffDays < 0) return t('tasks.daysAgo', { n: Math.abs(diffDays) })
+      if (diffDays < 7) return t('tasks.inDays', { n: diffDays })
 
-      if (diffDays === 0) return isJapanese ? '今日' : 'today'
-      if (diffDays === 1) return isJapanese ? '明日' : 'tomorrow'
-      if (diffDays === -1) return isJapanese ? '昨日' : 'yesterday'
-      if (diffDays < 0) return isJapanese ? `${Math.abs(diffDays)}日前` : `${Math.abs(diffDays)} days ago`
-      if (diffDays < 7) return isJapanese ? `${diffDays}日後` : `in ${diffDays} days`
-
-      const locale = isJapanese ? 'ja-JP' : 'en-US'
+      const locale = currentLocale.value === 'ja' ? 'ja-JP' : 'en-US'
       return date.toLocaleDateString(locale, {
         month: 'short',
         day: 'numeric',
@@ -210,14 +208,12 @@ export default {
     }
 
     const getStatusText = (dueDate, status) => {
-      const isJapanese = currentLocale.value === 'ja'
-
-      if (status === 'completed') return isJapanese ? '完了' : 'Completed'
+      if (status === 'completed') return t('tasks.completed')
 
       const statusClass = getStatusClass(dueDate, status)
-      if (statusClass === 'overdue') return isJapanese ? '期限超過' : 'Overdue'
-      if (statusClass === 'urgent') return isJapanese ? 'もうすぐ期限' : 'Due Soon'
-      return isJapanese ? '予定' : 'Upcoming'
+      if (statusClass === 'overdue') return t('tasks.overdue')
+      if (statusClass === 'urgent') return t('tasks.dueSoon')
+      return t('tasks.upcoming')
     }
 
     const translatePriority = (priority) => {
