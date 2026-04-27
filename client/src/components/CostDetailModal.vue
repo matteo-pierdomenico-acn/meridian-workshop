@@ -205,7 +205,7 @@ const close = () => {
 }
 
 .close-button:hover {
-  background: #f1f5f9;
+  background: var(--bg-subtle);
   color: var(--text-primary);
 }
 
@@ -294,7 +294,7 @@ const close = () => {
 }
 
 .cost-item.procurement .cost-icon {
-  background: #3b82f6;
+  background: var(--accent);
   color: white;
 }
 
@@ -338,14 +338,14 @@ const close = () => {
 
 .modal-footer {
   padding: 1.5rem;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid var(--border);
   display: flex;
   justify-content: flex-end;
 }
 
 .btn-secondary {
   padding: 0.625rem 1.25rem;
-  background: #f1f5f9;
+  background: var(--bg-subtle);
   border: 1px solid var(--border);
   border-radius: 8px;
   font-weight: 500;
@@ -357,7 +357,7 @@ const close = () => {
 }
 
 .btn-secondary:hover {
-  background: #e2e8f0;
+  background: var(--border);
   border-color: var(--border-strong);
 }
 

@@ -225,7 +225,7 @@ const handleLogout = () => {
 
 .dropdown-divider {
   height: 1px;
-  background: #e2e8f0;
+  background: var(--border);
   margin: 0.5rem 0;
 }
 
@@ -269,7 +269,7 @@ const handleLogout = () => {
 
 .task-badge {
   margin-left: auto;
-  background: #2563eb;
+  background: var(--accent);
   color: white;
   font-size: 0.75rem;
   font-weight: 600;

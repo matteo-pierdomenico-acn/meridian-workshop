@@ -274,7 +274,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 2rem;
-  border-bottom: 2px solid #e2e8f0;
+  border-bottom: 2px solid var(--border);
 }
 
 .modal-title {
@@ -298,7 +298,7 @@ export default {
 }
 
 .close-button:hover {
-  background: #f1f5f9;
+  background: var(--bg-subtle);
   color: var(--text-primary);
 }
 
@@ -310,7 +310,7 @@ export default {
 
 .modal-footer {
   padding: 1.5rem 2rem;
-  border-top: 2px solid #e2e8f0;
+  border-top: 2px solid var(--border);
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
@@ -318,7 +318,7 @@ export default {
 
 .btn-secondary {
   padding: 0.75rem 1.5rem;
-  background: #f1f5f9;
+  background: var(--bg-subtle);
   color: #475569;
   border: none;
   border-radius: 8px;
@@ -328,7 +328,7 @@ export default {
 }
 
 .btn-secondary:hover {
-  background: #e2e8f0;
+  background: var(--bg-subtle);
 }
 
 /* Task Form */
@@ -374,7 +374,7 @@ label {
 .task-input,
 .task-select {
   padding: 0.75rem;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--border);
   border-radius: 8px;
   font-size: 0.95rem;
   transition: border-color 0.2s ease;
@@ -416,7 +416,7 @@ label {
 
 .tasks-divider {
   height: 1px;
-  background: #e2e8f0;
+  background: var(--bg-subtle);
   margin: 2rem 0;
 }
 
@@ -436,7 +436,7 @@ label {
 
 .task-item {
   background: var(--bg-surface);
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--border);
   border-radius: 10px;
   padding: 1rem 1.25rem;
   transition: all 0.2s ease;
@@ -456,7 +456,7 @@ label {
 }
 
 .task-item.priority-low {
-  border-left: 4px solid #2563eb;
+  border-left: 4px solid var(--accent);
 }
 
 .task-item.completed {

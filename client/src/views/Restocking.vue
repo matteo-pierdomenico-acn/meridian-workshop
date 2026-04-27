@@ -246,8 +246,8 @@ export default {
 
 .currency-prefix {
   padding: 0.5rem 0.625rem;
-  background: #f1f5f9;
-  border: 1px solid #cbd5e1;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-strong);
   border-right: none;
   border-radius: 8px 0 0 8px;
   font-size: 0.875rem;
@@ -258,7 +258,7 @@ export default {
 .budget-input {
   width: 140px;
   padding: 0.5rem 0.75rem;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border-strong);
   border-right: none;
   font-size: 0.875rem;
   color: var(--text-primary);
@@ -268,7 +268,7 @@ export default {
 
 .budget-input:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: var(--accent);
   background: var(--bg-surface);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   z-index: 1;
@@ -277,9 +277,9 @@ export default {
 
 .apply-btn {
   padding: 0.5rem 1rem;
-  background: #3b82f6;
+  background: var(--accent);
   color: white;
-  border: 1px solid #3b82f6;
+  border: 1px solid var(--accent);
   border-radius: 0 8px 8px 0;
   font-size: 0.875rem;
   font-weight: 500;
@@ -289,8 +289,8 @@ export default {
 }
 
 .apply-btn:hover {
-  background: #2563eb;
-  border-color: #2563eb;
+  background: var(--accent-bar);
+  border-color: var(--accent-bar);
 }
 
 .stats-grid {
@@ -302,7 +302,6 @@ export default {
 
 .stat-card {
   background: var(--bg-surface);
-  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 1.25rem 1.5rem;
 }

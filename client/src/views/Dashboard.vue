@@ -794,14 +794,14 @@ export default {
 .kpi-progress-bar {
   width: 100%;
   height: 6px;
-  background: #f1f5f9;
+  background: var(--bg-subtle);
   border-radius: 3px;
   overflow: hidden;
 }
 
 .kpi-progress {
   height: 100%;
-  background: #3b82f6;
+  background: var(--accent);
   border-radius: 3px;
   transition: width 0.6s ease;
 }
@@ -1044,7 +1044,7 @@ export default {
   width: 100%;
   max-width: 60px;
   min-height: 8px;
-  background: #3b82f6;
+  background: var(--accent);
   border-radius: 6px 6px 0 0;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -1052,18 +1052,18 @@ export default {
 }
 
 .line-bar.empty-bar {
-  background: #e2e8f0;
+  background: var(--bg-subtle);
   box-shadow: none;
   min-height: 4px;
 }
 
 .line-bar:hover {
-  background: #2563eb;
+  background: var(--accent-bar);
   transform: scaleY(1.05);
 }
 
 .line-bar.empty-bar:hover {
-  background: #cbd5e1;
+  background: var(--border-strong);
   transform: none;
 }
 
@@ -1130,7 +1130,7 @@ export default {
 .task-input {
   flex: 1;
   padding: 0.75rem;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--border);
   border-radius: 8px;
   font-size: 0.95rem;
   transition: border-color 0.2s ease;
@@ -1248,12 +1248,12 @@ export default {
 }
 
 .po-button.create {
-  background: #3b82f6;
+  background: var(--accent);
   color: white;
 }
 
 .po-button.create:hover {
-  background: #2563eb;
+  background: var(--accent-bar);
   transform: translateY(-1px);
   box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
 }

@@ -186,7 +186,7 @@ const getStockBadgeClass = (stockLevel) => {
 }
 
 .close-button:hover {
-  background: #f1f5f9;
+  background: var(--bg-subtle);
   color: var(--text-primary);
 }
 
@@ -288,7 +288,7 @@ const getStockBadgeClass = (stockLevel) => {
 
 .modal-footer {
   padding: 1.5rem;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid var(--border);
   display: flex;
   justify-content: flex-end;
   gap: 0.75rem;
@@ -296,7 +296,7 @@ const getStockBadgeClass = (stockLevel) => {
 
 .btn-secondary {
   padding: 0.625rem 1.25rem;
-  background: #f1f5f9;
+  background: var(--bg-subtle);
   border: 1px solid var(--border);
   border-radius: 8px;
   font-weight: 500;
@@ -308,7 +308,7 @@ const getStockBadgeClass = (stockLevel) => {
 }
 
 .btn-secondary:hover {
-  background: #e2e8f0;
+  background: var(--border);
   border-color: var(--border-strong);
 }
 

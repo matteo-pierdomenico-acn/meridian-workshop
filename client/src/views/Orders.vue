@@ -210,7 +210,7 @@ export default {
 
 .items-summary {
   cursor: pointer;
-  color: #3b82f6;
+  color: var(--accent);
   font-weight: 500;
   list-style: none;
   user-select: none;
@@ -234,7 +234,7 @@ export default {
 }
 
 .items-summary:hover {
-  color: #2563eb;
+  color: var(--accent);
   text-decoration: underline;
 }
 
@@ -259,7 +259,7 @@ export default {
   flex-direction: column;
   gap: 0.25rem;
   padding: 0.5rem;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border);
 }
 
 .item-entry:last-child {

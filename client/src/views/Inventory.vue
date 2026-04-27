@@ -273,7 +273,7 @@ export default {
 .search-input {
   width: 100%;
   padding: 0.5rem 2.5rem 0.5rem 2.5rem;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border-strong);
   border-radius: 8px;
   font-size: 0.875rem;
   color: var(--text-primary);
@@ -283,7 +283,7 @@ export default {
 
 .search-input:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: var(--accent);
   background: var(--bg-surface);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
@@ -308,7 +308,7 @@ export default {
 }
 
 .clear-search:hover {
-  background: #e2e8f0;
+  background: var(--bg-subtle);
   color: var(--text-muted);
 }
 
