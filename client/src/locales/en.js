@@ -6,6 +6,8 @@ export default {
     orders: 'Orders',
     finance: 'Finance',
     demandForecast: 'Demand Forecast',
+    reports: 'Reports',
+    restocking: 'Restocking',
     companyName: 'Catalyst Components',
     subtitle: 'Inventory Management System'
   },
@@ -195,7 +197,8 @@ export default {
     category: 'Category',
     orderStatus: 'Order Status',
     all: 'All',
-    allMonths: 'All Months'
+    allMonths: 'All Months',
+    resetFilters: 'Reset all filters'
   },
 
   // Statuses
@@ -274,6 +277,61 @@ export default {
     december: 'December'
   },
 
+  // Restocking
+  restocking: {
+    title: 'Restocking Recommendations',
+    subtitle: 'Purchase order recommendations based on stock levels, demand forecast, and budget',
+    budgetCeiling: 'Budget Ceiling',
+    budgetPlaceholder: 'Enter budget ceiling...',
+    apply: 'Apply',
+    withinBudget: 'Within Budget',
+    overBudget: 'Over Budget',
+    totalCost: 'Total Cost',
+    budgetRemaining: 'Budget Remaining',
+    itemsRecommended: 'Items Recommended',
+    itemsOverBudget: 'Items Over Budget',
+    sku: 'SKU',
+    item: 'Item',
+    category: 'Category',
+    warehouse: 'Warehouse',
+    currentStock: 'Current Stock',
+    reorderPoint: 'Reorder Point',
+    recommendedQty: 'Recommended Qty',
+    unitCost: 'Unit Cost',
+    estimatedCost: 'Estimated Cost',
+    trend: 'Trend',
+    priority: 'Priority',
+    backlog: 'Backlog',
+    forecastBased: 'Forecast',
+    heuristicBased: 'Estimated',
+    noRecommendations: 'No restocking needed for selected filters.',
+    allStocked: 'All items are adequately stocked.'
+  },
+
+  // Reports
+  reports: {
+    title: 'Performance Reports',
+    subtitle: 'View quarterly performance metrics and monthly trends',
+    quarterlyPerformance: 'Quarterly Performance',
+    monthlyTrend: 'Monthly Revenue Trend',
+    momAnalysis: 'Month-over-Month Analysis',
+    quarter: 'Quarter',
+    totalOrders: 'Total Orders',
+    totalRevenue: 'Total Revenue',
+    avgOrderValue: 'Avg Order Value',
+    fulfillmentRate: 'Fulfillment Rate',
+    month: 'Month',
+    orders: 'Orders',
+    revenue: 'Revenue',
+    change: 'Change',
+    growthRate: 'Growth Rate',
+    totalRevenueYTD: 'Total Revenue (YTD)',
+    avgMonthlyRevenue: 'Avg Monthly Revenue',
+    totalOrdersYTD: 'Total Orders (YTD)',
+    bestQuarter: 'Best Performing Quarter',
+    firstMonth: 'First month'
+  },
+
   // Profile Menu
   profile: {
     profileDetails: 'Profile Details',
@@ -301,7 +359,16 @@ export default {
     priority: 'Priority',
     dueDate: 'Due Date',
     addTask: 'Add Task',
-    noTasks: 'No tasks yet. Add your first task above!'
+    noTasks: 'No tasks yet. Add your first task above!',
+    today: 'today',
+    tomorrow: 'tomorrow',
+    yesterday: 'yesterday',
+    daysAgo: '{n} days ago',
+    inDays: 'in {n} days',
+    completed: 'Completed',
+    overdue: 'Overdue',
+    dueSoon: 'Due Soon',
+    upcoming: 'Upcoming'
   },
 
   // Language

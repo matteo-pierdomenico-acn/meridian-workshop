@@ -177,15 +177,13 @@ export default {
       const diffTime = dueDate - today
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
 
-      const isJapanese = currentLocale.value === 'ja'
+      if (diffDays === 0) return t('tasks.today')
+      if (diffDays === 1) return t('tasks.tomorrow')
+      if (diffDays === -1) return t('tasks.yesterday')
+      if (diffDays < 0) return t('tasks.daysAgo', { n: Math.abs(diffDays) })
+      if (diffDays < 7) return t('tasks.inDays', { n: diffDays })
 
-      if (diffDays === 0) return isJapanese ? '今日' : 'today'
-      if (diffDays === 1) return isJapanese ? '明日' : 'tomorrow'
-      if (diffDays === -1) return isJapanese ? '昨日' : 'yesterday'
-      if (diffDays < 0) return isJapanese ? `${Math.abs(diffDays)}日前` : `${Math.abs(diffDays)} days ago`
-      if (diffDays < 7) return isJapanese ? `${diffDays}日後` : `in ${diffDays} days`
-
-      const locale = isJapanese ? 'ja-JP' : 'en-US'
+      const locale = currentLocale.value === 'ja' ? 'ja-JP' : 'en-US'
       return date.toLocaleDateString(locale, {
         month: 'short',
         day: 'numeric',
@@ -210,14 +208,12 @@ export default {
     }
 
     const getStatusText = (dueDate, status) => {
-      const isJapanese = currentLocale.value === 'ja'
-
-      if (status === 'completed') return isJapanese ? '完了' : 'Completed'
+      if (status === 'completed') return t('tasks.completed')
 
       const statusClass = getStatusClass(dueDate, status)
-      if (statusClass === 'overdue') return isJapanese ? '期限超過' : 'Overdue'
-      if (statusClass === 'urgent') return isJapanese ? 'もうすぐ期限' : 'Due Soon'
-      return isJapanese ? '予定' : 'Upcoming'
+      if (statusClass === 'overdue') return t('tasks.overdue')
+      if (statusClass === 'urgent') return t('tasks.dueSoon')
+      return t('tasks.upcoming')
     }
 
     const translatePriority = (priority) => {
@@ -259,7 +255,7 @@ export default {
 }
 
 .modal-container {
-  background: white;
+  background: var(--bg-surface);
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   width: 90%;
@@ -278,20 +274,20 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 2rem;
-  border-bottom: 2px solid #e2e8f0;
+  border-bottom: 2px solid var(--border);
 }
 
 .modal-title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #0f172a;
+  color: var(--text-primary);
   margin: 0;
 }
 
 .close-button {
   background: none;
   border: none;
-  color: #64748b;
+  color: var(--text-muted);
   cursor: pointer;
   padding: 0.5rem;
   display: flex;
@@ -302,8 +298,8 @@ export default {
 }
 
 .close-button:hover {
-  background: #f1f5f9;
-  color: #0f172a;
+  background: var(--bg-subtle);
+  color: var(--text-primary);
 }
 
 .modal-body {
@@ -314,7 +310,7 @@ export default {
 
 .modal-footer {
   padding: 1.5rem 2rem;
-  border-top: 2px solid #e2e8f0;
+  border-top: 2px solid var(--border);
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
@@ -322,7 +318,7 @@ export default {
 
 .btn-secondary {
   padding: 0.75rem 1.5rem;
-  background: #f1f5f9;
+  background: var(--bg-subtle);
   color: #475569;
   border: none;
   border-radius: 8px;
@@ -332,12 +328,12 @@ export default {
 }
 
 .btn-secondary:hover {
-  background: #e2e8f0;
+  background: var(--bg-subtle);
 }
 
 /* Task Form */
 .task-form {
-  background: #f8fafc;
+  background: var(--bg-subtle);
   border-radius: 12px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
@@ -378,7 +374,7 @@ label {
 .task-input,
 .task-select {
   padding: 0.75rem;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--border);
   border-radius: 8px;
   font-size: 0.95rem;
   transition: border-color 0.2s ease;
@@ -393,7 +389,7 @@ label {
 
 .task-select {
   cursor: pointer;
-  background: white;
+  background: var(--bg-surface);
 }
 
 .task-add-btn {
@@ -420,14 +416,14 @@ label {
 
 .tasks-divider {
   height: 1px;
-  background: #e2e8f0;
+  background: var(--bg-subtle);
   margin: 2rem 0;
 }
 
 .no-tasks {
   text-align: center;
   padding: 3rem;
-  color: #64748b;
+  color: var(--text-muted);
   font-size: 1.1rem;
   font-style: italic;
 }
@@ -439,15 +435,15 @@ label {
 }
 
 .task-item {
-  background: white;
-  border: 2px solid #e2e8f0;
+  background: var(--bg-surface);
+  border: 2px solid var(--border);
   border-radius: 10px;
   padding: 1rem 1.25rem;
   transition: all 0.2s ease;
 }
 
 .task-item:hover {
-  border-color: #cbd5e1;
+  border-color: var(--border-strong);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -460,7 +456,7 @@ label {
 }
 
 .task-item.priority-low {
-  border-left: 4px solid #2563eb;
+  border-left: 4px solid var(--accent);
 }
 
 .task-item.completed {
@@ -494,7 +490,7 @@ label {
   flex: 1;
   cursor: pointer;
   user-select: none;
-  color: #0f172a;
+  color: var(--text-primary);
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.4;
@@ -563,7 +559,7 @@ label {
   align-items: center;
   gap: 0.5rem;
   font-size: 0.813rem;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .task-due-date svg {
